@@ -1,4 +1,4 @@
---- Lua/bitvim/options.lua ---
+--- core/options.lua ---
 
 -- Leader keys
 vim.g.mapleader = " "
@@ -12,28 +12,28 @@ local opts = {
   undofile = true,
   undodir = vim.fn.stdpath("data") .. "/undo",
   undolevels = 10000,
-  
+
   -- Behavior
   hidden = true,
   confirm = true,
   autowrite = false,
-  
-  -- Clipboard 
-  clipboard ="unnamed",
-  
+
+  -- Clipboard
+  clipboard = "unnamed",
+
   -- Encoding
   encoding = "utf-8",
   fileencoding = "utf-8",
-  
-  -- Folding 
+
+  -- Folding
   foldmethod = "expr",
   foldexpr = "v:lua.vim.treesitter.foldexpr()",
   foldenable = true,
   foldlevel = 99,
   foldlevelstart = 99,
-  foldtext = "", 
-  
-  -- Indentation 
+  foldtext = "",
+
+  -- Indentation
   autoindent = true,
   smartindent = true,
   copyindent = true,
@@ -43,34 +43,34 @@ local opts = {
   tabstop = 2,
   softtabstop = 2,
   shiftround = true,
-  
+
   -- Line Numbers
   number = true,
   relativenumber = true,
-  
-  -- Performance 
+
+  -- Performance
   lazyredraw = false,
   timeoutlen = 300,
   updatetime = 200,
-  
-  -- Scrolling 
+
+  -- Scrolling
   scrolloff = 8,
   sidescrolloff = 8,
   smoothscroll = true,
-  
-  -- Searching 
+
+  -- Searching
   ignorecase = true,
   smartcase = true,
   infercase = true,
   hlsearch = true,
   incsearch = true,
   inccommand = "nosplit",
-  
-  -- Grep 
+
+  -- Grep
   grepprg = "rg --vimgrep",
   grepformat = "%f:%l:%c:%m",
-  
-  -- UI/Appearance 
+
+  -- UI/Appearance
   termguicolors = true,
   background = "dark",
   cursorline = true,
@@ -81,15 +81,15 @@ local opts = {
   showmode = false,
   laststatus = 3,
   showtabline = 2,
-  
+
   -- Visual & Formatting
   breakindent = true,
   linebreak = true,
   wrap = false,
   virtualedit = "block",
   list = false,
-  
-  -- Fill characters 
+
+  -- Fill characters
   fillchars = {
     foldopen = "",
     foldclose = "",
@@ -98,17 +98,17 @@ local opts = {
     diff = "╱",
     eob = " ",
   },
-  
-  -- Format options 
+
+  -- Format options
   formatoptions = "jcroqlnt",
-  
-  -- Completion 
+
+  -- Completion
   completeopt = { "menu", "menuone", "noselect" },
-  
-  -- Shortmess 
+
+  -- Shortmess
   shortmess = "aoOTIcFWs",
-  
-  -- Session 
+
+  -- Session
   sessionoptions = {
     "buffers",
     "curdir",
@@ -119,22 +119,22 @@ local opts = {
     "skiprtp",
     "folds",
   },
-  
+
   -- Windows/Splits
   splitbelow = true,
   splitright = true,
   splitkeep = "screen",
-  
-  -- Wildmenu 
+
+  -- Wildmenu
   wildmode = "longest:full,full",
   wildoptions = "pum",
-  
-  -- Backspace behavior 
-  backspace = {  "nostop" },
-  
-  -- Jumps 
+
+  -- Backspace behavior
+  backspace = { "nostop" },
+
+  -- Jumps
   jumpoptions = "view",
-  
+
   -- Mouse & Misc
   mouse = "a",
   title = true,
@@ -145,4 +145,3 @@ local opts = {
 for k, v in pairs(opts) do
   vim.opt[k] = v
 end
-

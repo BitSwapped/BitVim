@@ -1,2 +1,2 @@
 --- Init.lua ---
-require('bitvim')
+require("bitvim.core")
