@@ -1,4 +1,4 @@
--- utils/keymap.lua
+--- utils/keymap.lua ---
 
 ---@class Utils.Keymap
 local M = {}
