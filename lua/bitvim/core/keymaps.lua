@@ -1,6 +1,7 @@
 --- core/keymaps.lua ---
 
 local map = require("bitvim.utils.keymap").map
+local toggle = require("bitvim.utils.toggle")
 
 -- Better Up and Down Movement
 map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
@@ -41,15 +42,14 @@ map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search R
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- Save Current File
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
-map({ "i", "x", "n", "s" }, "<leader>w", "<cmd>w<cr><esc>", { desc = "Save File" })
+-- Editor Operations
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Quick Save" })
+map("n", "<leader>w", "<cmd>w<cr><esc>", { desc = "Quick Save" })
 
--- Quit Neovim (Can't quit here for aesthetics)
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quick Quit Window" })
 
--- New File
-map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+-- Buffer Operations
+map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 
 -- Better Indenting
 map("x", "<", "<gv")
@@ -72,3 +72,10 @@ map("x", "C", '"_C', { desc = "Change without yanking" })
 
 map("x", "p", "P", { desc = "Paste content you've previously yanked" })
 map("x", "P", "p", { desc = "Yank what you will override then paste" })
+
+-- Toggles
+map("n", "<leader>ud", toggle.diagnostics, { desc = "Toggle Diagnostics" })
+map("n", "<leader>uh", toggle.inlay_hints, { desc = "Toggle Inlay Hints" })
+map("n", "<leader>un", toggle.number, { desc = "Toggle Line Numbers" })
+map("n", "<leader>ur", toggle.relative_number, { desc = "Toggle Relative Numbers" })
+map("n", "<leader>uw", toggle.wrap, { desc = "Toggle Line Wrap" })

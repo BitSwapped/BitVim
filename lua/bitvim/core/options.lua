@@ -130,7 +130,7 @@ local opts = {
   wildoptions = "pum",
 
   -- Backspace behavior
-  backspace = { "nostop" },
+  backspace = { "nostop","indent", "eol", "start"  },
 
   -- Jumps
   jumpoptions = "view",
