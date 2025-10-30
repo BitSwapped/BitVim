@@ -1,5 +1,6 @@
 {
   "alpha-nvim": { "branch": "main", "commit": "3979b01cb05734331c7873049001d3f2bb8477f4" },
+  "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "catppuccin": { "branch": "main", "commit": "8c4125e3c746976ba025dc5d908fa22c6aa09486" },
   "edge": { "branch": "master", "commit": "dfb013e84e8b8302d99ed75e664ccb2a05925ad3" },
   "everforest": { "branch": "master", "commit": "0909c23a2b8cbc337cffe91fda36381747e88506" },
@@ -17,5 +18,6 @@
   "oxocarbon.nvim": { "branch": "main", "commit": "9f85f6090322f39b11ae04a343d4eb9d12a86897" },
   "rose-pine": { "branch": "main", "commit": "72a04c4065345b51b56aed4859ea1d884f734097" },
   "sonokai": { "branch": "master", "commit": "48c809c887ce7b7828f7ea27408fc2ef2179efb5" },
-  "tokyonight.nvim": { "branch": "main", "commit": "2642dbb83333e0575d1c3436e1d837926871c5fb" }
+  "tokyonight.nvim": { "branch": "main", "commit": "2642dbb83333e0575d1c3436e1d837926871c5fb" },
+  "witch-line": { "branch": "main", "commit": "0b8d9552d024d4a4ad88be6303a45b590ea826a7" }
 }
