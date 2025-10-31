@@ -1,0 +1,161 @@
+return {
+	{ "MunifTanjim/nui.nvim" },
+
+	{ 
+	  "nvim-mini/mini.icons",
+	  opts = {},
+	  init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end
+  },
+
+	{
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		version = "*",
+		opts = {
+			options = {
+				buffer_close_icon = "",
+				diagnostics = "nvim_lsp",
+				diagnostics_update_on_event = true,
+				color_icons = true,
+				get_element_icon = function(element)
+					local icon, hl = require("mini.icons").get("filetype", element.filetype)
+					return icon, hl
+				end,
+				separator_style = "thick",
+			},
+		},
+		config = function(_, opts)
+			require("bufferline").setup(opts)
+		end,
+	},
+	{
+    'nvim-lualine/lualine.nvim',
+    event = "VeryLazy",
+    init = function()
+      vim.g.lualine_laststatus = vim.o.laststatus
+      if vim.fn.argc(-1) > 0 then
+        -- set an empty statusline till lualine loads
+        vim.o.statusline = " "
+      else
+        -- hide the statusline on the starter page
+        vim.o.laststatus = 0
+      end
+    end,
+    config = function()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          --theme = 'auto',
+          globasection_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' },lstatus = true,
+          globalstatus = true,
+          refresh = {statusline = 1000}
+        },
+        sections = {
+          -- Left section - Mode with single character
+          lualine_a = {
+            {
+              'mode',
+              padding = { left = 1, right = 1 },
+            }
+          },
+          -- Left-center section - Git info
+          lualine_b = {
+              'branch',
+            {
+              'diff',
+              symbols = { added = "", modified = "", removed = "" },
+              padding = { left = 1, right = 1 },
+            },
+          },
+
+          -- Center section - Filename with icon, LSP info
+          lualine_c = {
+            {
+              'filename',
+              file_status = true,
+              symbols = {
+                modified = "●",
+                readonly = "",
+                unnamed = "",
+              },
+              padding = { left = 2, right = 1 },
+            },
+            {
+              -- LSP clients
+              function()
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                if #clients == 0 then
+                  return ''
+                end
+                local client_names = {}
+                for _, client in ipairs(clients) do
+                  table.insert(client_names, client.name)
+                end
+                if #client_names == 0 then
+                  return ''
+                end
+                return ' ' .. table.concat(client_names, ', ')
+              end,
+              color = { fg = '#a9a1e1' , gui = 'bold' },
+              padding = { left = 1, right = 1 },
+            },
+          },
+
+          -- Right-center section - Diagnostics and filetype icon only
+          lualine_x = {
+            {
+              'diagnostics',
+              sources = { 'nvim_diagnostic' },
+              symbols = { error = " ", warn = " ", info = " ", hint = " " },
+              padding = { left = 1, right = 1 },
+            },
+            {
+              'filetype',
+              colored = true,
+              icon_only = true,
+              padding = { left = 1, right = 1 },
+            },
+          },
+
+          -- Right section - Progress and location
+          lualine_y = {
+            {
+              'progress',
+              padding = { left = 1, right = 1 },
+            }
+          },
+
+          lualine_z = {
+            {
+              'location',
+              padding = { left = 1, right = 1 },
+            }
+          },
+        },
+
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {
+            {
+              'filename',
+              file_status = true,
+              path = 1,
+            }
+          },
+          lualine_x = { 'location' },
+          lualine_y = {},
+          lualine_z = {},
+        },
+
+        extensions = { 'lazy', 'mason', 'quickfix' }
+      }
+    end,
+  }
+}
