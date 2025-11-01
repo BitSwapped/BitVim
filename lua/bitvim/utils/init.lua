@@ -2,6 +2,7 @@
 
 ---@class Utils
 ---@field ui Utils.Ui
+---@field lsp Utils.Lsp
 ---@field keymap Utils.Keymap
 ---@field toggle Utils.Toggle
 local M = {}
