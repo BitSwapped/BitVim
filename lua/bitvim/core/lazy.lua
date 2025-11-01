@@ -58,8 +58,6 @@ require("lazy").setup({
 				"tohtml",
 				"tutor",
 				"zipPlugin",
-				"matchit",
-				"matchparen",
 				"netrw",
 				"netrwPlugin",
 				"netrwSettings",
