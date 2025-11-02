@@ -67,21 +67,6 @@ function M.diagnostics(state)
 	require("bitvim.utils").ui.notify(state and "Diagnostics enabled" or "Diagnostics disabled")
 end
 
---- Toggle LSP inlay hints
---- Toggle LSP inlay hints
-function M.inlay_hints()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local current = vim.b.inlay_hints_enabled
-
-	-- default true when nil
-	local enable = current == nil and true or not current
-
-	vim.lsp.inlay_hint.enable(enable, { bufnr = bufnr })
-	vim.b.inlay_hints_enabled = enable
-
-	require("bitvim.utils").ui.notify(enable and "Inlay hints enabled" or "Inlay hints disabled")
-end
-
 --- Toggle virtual text display
 function M.virtual_text()
 	local cfg = vim.diagnostic.config()

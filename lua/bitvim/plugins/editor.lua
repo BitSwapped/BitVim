@@ -1,3 +1,5 @@
+--- plugins/editor.lua ---
+
 return {
 	{
 		"nvim-mini/mini.cursorword",

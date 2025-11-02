@@ -1,8 +1,8 @@
 --- plugins/mini-files.lua ---
+
 return {
 	"echasnovski/mini.files",
 	version = false,
-
 	-- Lazy load on keybinds
 	keys = {
 		{
@@ -41,7 +41,6 @@ return {
 			trim_right = ">",
 		},
 
-		-- UI
 		windows = {
 			preview = true,
 			width_focus = 30,

@@ -51,6 +51,12 @@ map("n", "<leader>q", "<cmd>q<cr>", { desc = "Quick Quit Window" })
 -- Buffer Operations
 map("n", "<leader>bn", "<cmd>enew<cr>", { desc = "New Buffer" })
 
+-- Join lines without changing cursor position
+map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
+
+-- Clear highlights with <Esc>
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlights" })
+
 -- Better Indenting
 map("x", "<", "<gv")
 map("x", ">", ">gv")
@@ -60,9 +66,10 @@ map("x", "<Tab>", ">gv")
 -- Clipboard
 map("n", "<leader>y", '"+y<esc>', { desc = "Copy to clipboard" })
 map("x", "<leader>y", '"+y<esc>', { desc = "Copy to clipboard" })
-map("n", "<C-d>", '"+y<esc>dd', { desc = "Copy to clipboard and delete line" })
-map("x", "<C-d>", '"+y<esc>dd', { desc = "Copy to clipboard and delete line" })
-map("n", "<leader>p", '"+p<esc>', { desc = "Paste from clipboard" })
+map("x", "<leader>dy", '"+y<esc>dd', { desc = "Copy to clipboard and delete line" })
+map("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
+map("x", "<leader>p", '"+p', { desc = "Paste from clipboard" })
+map("n", "<leader>P", '"+P', { desc = "Paste before from clipboard" })
 
 -- Clipbard [Changing]
 map("n", "c", '"_c', { desc = "Change without yanking" })
@@ -70,12 +77,31 @@ map("n", "C", '"_C', { desc = "Change without yanking" })
 map("x", "c", '"_c', { desc = "Change without yanking" })
 map("x", "C", '"_C', { desc = "Change without yanking" })
 
-map("x", "p", "P", { desc = "Paste content you've previously yanked" })
-map("x", "P", "p", { desc = "Yank what you will override then paste" })
+map("n", "d", '"_d', { desc = "Delete without yanking" })
+map("n", "D", '"_D', { desc = "Delete without yanking" })
+map("x", "d", '"_d', { desc = "Change without yanking" })
+map("x", "D", '"_D', { desc = "Change without yanking" })
+
+-- Delete single character without yanking
+map("n", "x", '"_x', { desc = "Delete char without yanking" })
+map("n", "X", '"_X', { desc = "Delete char before without yanking" })
+
+-- Better paste in visual mode (don't yank what you're replacing)
+map("x", "p", '"_dP', { desc = "Paste without yanking replaced text" })
+map("x", "P", '"_dp', { desc = "Paste before without yanking" })
 
 -- Toggles
 map("n", "<leader>ud", toggle.diagnostics, { desc = "Toggle Diagnostics" })
-map("n", "<leader>uh", toggle.inlay_hints, { desc = "Toggle Inlay Hints" })
 map("n", "<leader>un", toggle.number, { desc = "Toggle Line Numbers" })
 map("n", "<leader>ur", toggle.relative_number, { desc = "Toggle Relative Numbers" })
 map("n", "<leader>uw", toggle.wrap, { desc = "Toggle Line Wrap" })
+map("n", "<leader>sh", toggle.hlsearch, { desc = "Toggle Highlight Search" })
+
+-- Diagnostic Display Toggles
+map("n", "<leader>uv", toggle.virtual_text, { desc = "Toggle Diagnostic Virtual Text" })
+map("n", "<leader>uu", toggle.underline, { desc = "Toggle Diagnostic Underline" })
+map("n", "<leader>us", toggle.signs, { desc = "Toggle Diagnostic Signs" })
+
+-- Auto formatting
+vim.keymap.set("n", "<leader>uf", toggle.autoformat, { desc = "Toggle Format (Global)" })
+vim.keymap.set("n", "<leader>uF", toggle.autoformat_buffer, { desc = "Toggle Format (Buffer)" })

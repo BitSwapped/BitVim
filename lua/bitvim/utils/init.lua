@@ -4,6 +4,7 @@
 ---@field ui Utils.Ui
 ---@field lsp Utils.Lsp
 ---@field keymap Utils.Keymap
+---@field format Utils.Format
 ---@field toggle Utils.Toggle
 local M = {}
 

@@ -2,7 +2,6 @@
 
 local M = {}
 
----  Setup diagnostic signs, virtual text, floating windows
 function M.setup()
 	M.signs = {
 		Error = " ",
@@ -11,13 +10,11 @@ function M.setup()
 		Info = " ",
 	}
 
-	---  Define diagnostic signs
 	for type, icon in pairs(M.signs) do
 		local hl = "DiagnosticSign" .. type
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 
-	---  Global diagnostic configuration
 	vim.diagnostic.config({
 		virtual_text = {
 			spacing = 4,

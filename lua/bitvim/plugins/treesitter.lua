@@ -5,7 +5,9 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		version = false,
 		build = ":TSUpdate",
-		event = "VeryLazy",
+		event = "User FilePost",
+
+		dependencies = { "nvim-treestier/nvim-treesitter-textobjects" },
 
 		init = function(plugin)
 			require("lazy.core.loader").add_to_rtp(plugin)
@@ -15,26 +17,6 @@ return {
 		---@type TSConfig
 		---@diagnostic disable-next-line: missing-fields
 		opts = {
-			ensure_installed = {
-				"bash",
-				"c",
-				"diff",
-				"html",
-				"javascript",
-				"lua",
-				"luadoc",
-				"markdown",
-				"markdown_inline",
-				"python",
-				"query",
-				"regex",
-				"toml",
-				"tsx",
-				"typescript",
-				"vim",
-				"vimdoc",
-				"yaml",
-			},
 
 			highlight = {
 				enable = true,
@@ -69,7 +51,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		branch = "main",
-		event = "VeryLazy",
 		opts = {
 			move = {
 				enable = true,

@@ -3,10 +3,9 @@
 return {
 	"stevearc/conform.nvim",
 	dependencies = { "mason.nvim" },
-	event = { "BufReadPre", "BufNewFile" },
+	event = "LspAttach",
 	cmd = "ConformInfo",
 
-	--- Keymaps for formatting
 	keys = {
 		{
 			"<leader>cf",
@@ -26,7 +25,6 @@ return {
 		},
 	},
 
-	--- Autocmd to register conform formatters with bitvim utils
 	init = function()
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "VeryLazy",
@@ -49,9 +47,7 @@ return {
 		})
 	end,
 
-	--- Conform configuration options
 	opts = function()
-		---  Default formatting options
 		local opts = {
 			default_format_opts = {
 				timeout_ms = 3000,
@@ -60,7 +56,6 @@ return {
 				lsp_format = "fallback",
 			},
 
-			---  Filetype-specific formatters
 			formatters_by_ft = {
 				lua = { "stylua" },
 				c = { "clang_format" },
@@ -72,7 +67,6 @@ return {
 				zig = { "zigfmt" },
 			},
 
-			---  Formatter-specific configuration
 			formatters = {
 				injected = { options = { ignore_errors = true } },
 				shfmt = { prepend_args = { "-i", "2", "-ci" } },
@@ -82,7 +76,6 @@ return {
 		return opts
 	end,
 
-	--- Setup Conform with opts and bitvim formatting utilities
 	config = function(_, opts)
 		require("conform").setup(opts)
 		require("bitvim.utils.format").setup()

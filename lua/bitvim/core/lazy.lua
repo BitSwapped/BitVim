@@ -25,13 +25,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 
--- Add lazy to the runtimepath
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
-		-- Import plugins from lua/bitvim/plugins/
 		{ import = "bitvim.plugins" },
 	},
 
@@ -66,7 +63,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- UI settings
 	ui = {
 		border = "rounded",
 	},

@@ -9,7 +9,6 @@ return {
 			{
 				"rafamadriz/friendly-snippets",
 				config = function()
-					-- Load VSCode-style snippets from plugin and local config
 					require("luasnip.loaders.from_vscode").lazy_load()
 					require("luasnip.loaders.from_vscode").lazy_load({
 						paths = { vim.fn.stdpath("config") .. "/snippets" },
@@ -32,7 +31,7 @@ return {
 	{
 		"saghen/blink.cmp",
 		version = "*",
-		event = "InsertEnter",
+		event = "LspAttach",
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"xzbdmw/colorful-menu.nvim",
@@ -87,8 +86,8 @@ return {
 						draw = {
 							padding = 2,
 							columns = {
-								{ "kind_icon" }, -- Icon column
-								{ "label", gap = 2 }, -- Label column using colorful-menu
+								{ "kind_icon" },
+								{ "label", gap = 2 },
 							},
 							components = {
 								label = {
