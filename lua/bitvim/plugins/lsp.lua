@@ -21,9 +21,10 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
-			automatic_enable = true,
+			ensure_installed = { "lua_ls", "clangd" },
 		},
 	},
+
 	{
 		"neovim/nvim-lspconfig",
 		event = "User BitFile",
@@ -36,18 +37,19 @@ return {
 			require("bitvim.lsp.diagnostics").setup()
 
 			local handlers = require("bitvim.lsp.handlers")
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
+			-- Get capabilities from blink.cmp
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			if pcall(require, "blink.cmp") then
 				capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 			end
 
+			-- Set global defaults once
 			vim.lsp.config("*", {
 				capabilities = capabilities,
-				handlers = handlers.default_handlers,
-				root_markers = { ".git" },
 			})
 
+			-- Single LspAttach autocmd for keymaps
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("bitvim-lsp-attach", { clear = true }),
 				callback = function(args)
@@ -57,28 +59,6 @@ return {
 					end
 				end,
 			})
-
-			vim.api.nvim_create_autocmd("LspDetach", {
-				group = vim.api.nvim_create_augroup("bitvim-lsp-detach", { clear = true }),
-				callback = function(args)
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
-					if client then
-						handlers.on_detach(client, args.buf)
-					end
-				end,
-			})
-
-			local ok, servers = pcall(require, "bitvim.lsp.servers")
-			if ok and servers then
-				for server_name, server_config in pairs(servers) do
-					local config = vim.tbl_deep_extend("force", {
-						capabilities = capabilities,
-						handlers = handlers.default_handlers,
-					}, server_config)
-
-					vim.lsp.config(server_name, config)
-				end
-			end
 		end,
 	},
 }

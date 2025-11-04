@@ -103,5 +103,7 @@ map("n", "<leader>uu", toggle.underline, { desc = "Toggle Diagnostic Underline" 
 map("n", "<leader>us", toggle.signs, { desc = "Toggle Diagnostic Signs" })
 
 -- Auto formatting
-vim.keymap.set("n", "<leader>uf", toggle.autoformat, { desc = "Toggle Format (Global)" })
-vim.keymap.set("n", "<leader>uF", toggle.autoformat_buffer, { desc = "Toggle Format (Buffer)" })
+map("n", "<leader>uf", toggle.autoformat, { desc = "Toggle Format (Global)" })
+map("n", "<leader>uF", toggle.autoformat_buffer, { desc = "Toggle Format (Buffer)" })
+
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy Package manager" })

@@ -76,17 +76,20 @@ autocmd({ "InsertEnter", "WinLeave", "InsertLeave", "WinEnter" }, {
 
 -- BitFilePost
 autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
-	group = vim.api.nvim_create_augroup("BitFilePost", { clear = true }),
 	callback = function(args)
-		local file = vim.api.nvim_buf_get_name(args.buf)
-		local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-		local filetype = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
-
-		if not vim.g.ui_entered or (file == "" and filetype ~= "minifiles") then
+		if args.event == "UIEnter" then
+			vim.g.ui_entered = true
 			return
 		end
+
+		local file = vim.api.nvim_buf_get_name(args.buf)
+		local ft = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
+
+		if not vim.g.ui_entered or file == "" or ft == "minifiles" then
+			return
+		end
+
 		vim.api.nvim_exec_autocmds("User", { pattern = "FilePost", modeline = false })
-		vim.api.nvim_del_augroup_by_name("BitFilePost")
 
 		vim.schedule(function()
 			vim.api.nvim_exec_autocmds("FileType", {})
@@ -97,7 +100,7 @@ autocmd({ "UIEnter", "BufReadPost", "BufNewFile" }, {
 -- BitFile and BitGitFile events for lazy loading
 local git_cache = {}
 
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
+autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
 	desc = "Trigger BitFile and BitGitFile user events",
 	callback = function(args)
 		local buf = args.buf
@@ -138,7 +141,7 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
 })
 
 -- BitDeferred event for post-startup loading
-vim.api.nvim_create_autocmd("VimEnter", {
+autocmd("VimEnter", {
 	desc = "Trigger BitDeferred after startup",
 	callback = function()
 		local function fire_deferred()
